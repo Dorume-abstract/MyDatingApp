@@ -9,7 +9,9 @@ namespace API.Entities
     {
         public int Id { get; set; }
         public string UserName { get; set; } //Can be Username, but ASP.NET (idk why)
-        
 
+        public byte[] PasswordHash { get; set; }
+
+        public byte[] PasswordSalt { get; set; }
     }
 }
