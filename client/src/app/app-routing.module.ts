@@ -5,18 +5,27 @@ import { ListsComponent } from './lists/lists.component';
 import { MemderDetailComponent } from './members/memder-detail/memder-detail.component';
 import { MemderListComponent } from './members/memder-list/memder-list.component';
 import { MessagesComponent } from './messages/messages.component';
+import { AuthGuard } from './_guards/auth.guard';
 
 const routes: Routes = [
-    {path: '', component: HomeComponent},
-    {path: 'members', component: MemderListComponent},
-    {path: 'members/:id', component: MemderDetailComponent},
-    {path: 'lists', component: ListsComponent},
-    {path: 'messages', component: MessagesComponent},
-    {path: '**', component: HomeComponent, pathMatch: 'full'}
+  { path: '', component: HomeComponent },
+  {
+    path: '',
+    runGuardsAndResolvers: 'always',
+    canActivate: [AuthGuard],
+    children: [
+      { path: 'members', component: MemderListComponent },
+      { path: 'members/:id', component: MemderDetailComponent },
+      { path: 'lists', component: ListsComponent },
+      { path: 'messages', component: MessagesComponent },
+    ],
+  },
+
+  { path: '**', component: HomeComponent, pathMatch: 'full' },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
