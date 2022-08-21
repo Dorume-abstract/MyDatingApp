@@ -7,34 +7,35 @@ import { User } from '../_models/user';
 import { AccountService } from '../_services/account.service';
 
 @Component({
-  selector: 'app-nav',
-  templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.css'],
+    selector: 'app-nav',
+    templateUrl: './nav.component.html',
+    styleUrls: ['./nav.component.css'],
 })
-export class NavComponent implements OnInit {
-  model: any = {};
+export class NavComponent implements OnInit
+{
+    model: any = {};
 
-  constructor(
-    public accountService: AccountService,
-    private router: Router,
-    private toastr: ToastrService
-  ) {}
+    constructor (
+        public accountService: AccountService,
+        private router: Router,
+        private toastr: ToastrService
+    ) { }
 
-  ngOnInit(): void {}
+    ngOnInit(): void { }
 
-  login() {
-    this.accountService.login(this.model).subscribe(
-      (response) => {
-        this.router.navigateByUrl('/members');
-      },
-      (error) => {
-        this.toastr.error(error.error);
-      }
-    );
-  }
+    login()
+    {
+        this.accountService.login(this.model).subscribe(
+            (response) =>
+            {
+                this.router.navigateByUrl('/members');
+            }
+        );
+    }
 
-  logout() {
-    this.accountService.logout();
-    this.router.navigateByUrl('/');
-  }
+    logout()
+    {
+        this.accountService.logout();
+        this.router.navigateByUrl('/');
+    }
 }
