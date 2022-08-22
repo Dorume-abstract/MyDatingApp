@@ -10,13 +10,7 @@
         "LookingFor": "Esse nisi culpa anim sunt do exercitation non qui magna. Excepteur commodo sint deserunt nulla laboris quis cillum. Cillum ut sit duis aliquip reprehenderit consequat consectetur dolore velit laborum. Est voluptate adipisicing quis esse est occaecat pariatur veniam pariatur qui amet eu ullamco elit.\r\n",
         "Interests": "Pariatur ullamco sit ullamco do nulla anim Lorem.",
         "City": "Elfrida",
-        "Country": "Swaziland",
-        "Photos": [
-            {
-                "Url": "https://randomuser.me/api/portraits/women/93.jpg",
-                "IsMain": true
-            }
-        ]
+        "Country": "Swaziland"
     },
     {
         "UserName": "Tiffany",
@@ -32,7 +26,7 @@
         "Country": "Tanzania",
         "Photos": [
             {
-                "Url": "https://randomuser.me/api/portraits/women/93.jpg",
+                "Url": "https://randomuser.me/api/portraits/women/91.jpg",
                 "IsMain": true
             }
         ]
