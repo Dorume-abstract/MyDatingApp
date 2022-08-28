@@ -16,10 +16,11 @@ export class MemberEditComponent implements OnInit
 {
     @ViewChild('editForm') editForm: NgForm;
     member: Member;
+    memberOld: Member;
     user: User;
     @HostListener('window:beforeunload', ['$event']) unloadNotification($event: any)
     {
-        if (this.editForm.dirty) {
+        if (this.isDataChanged()) {
             $event.returnValue = true;
         }
     }
@@ -40,6 +41,7 @@ export class MemberEditComponent implements OnInit
         this.memberService.getMember(this.user.username).subscribe(member =>
         {
             this.member = member;
+            this.memberOld = JSON.parse(JSON.stringify(member));
         })
     }
 
@@ -50,5 +52,16 @@ export class MemberEditComponent implements OnInit
             this.toastr.success("Profile updated successfully")
             this.editForm.reset(this.member);
         })
+    }
+
+    isDataChanged(){
+        this.memberOld.photos = this.member.photos;
+        this.memberOld.photoUrl = this.member.photoUrl;
+        
+        if(JSON.stringify(this.member) === JSON.stringify(this.memberOld)){
+            return false;
+        }else{
+            return true;
+        }
     }
 }

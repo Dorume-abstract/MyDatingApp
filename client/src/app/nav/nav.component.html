@@ -9,9 +9,6 @@
                 <li class="nav-item">
                     <a class="nav-link" routerLink="/lists" routerLinkActive="active">Lists</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="/messages" routerLinkActive="active">Messages</a>
-                </li>
             </ng-container>
             <li class="nav-item">
                 <a class="nav-link" routerLink="/errors" routerLinkActive="active">Errors</a>
@@ -19,8 +16,12 @@
         </ul>
 
         <div class="dropdown" *ngIf="(accountService.currentUser$ | async) as user" dropdown>
-            <a class="dropdown-toggle text-light" dropdownToggle>Welcome {{user.username | titlecase}}</a>
+            <img src="{{user.photoUrl}}" alt="{{user.username}}">
+            <a class="dropdown-toggle text-light ml-2" dropdownToggle>Welcome {{user.username | titlecase}} <span class="badge bg-success rounded-pill">12</span></a>
             <div class="div dropdown-menu mt-3" *dropdownMenu>
+                <div>
+                    <a class="a dropdown-item" routerLink="/messages" routerLinkActive="active">Messages <span class="badge bg-success rounded-pill">12</span></a>
+                </div>
                 <div routerLink="/member/edit" class="a dropdown-item">Edit Profile</div>
                 <div class="dropdown-divider"></div>
                 <div class="a dropdown-item" (click)="logout()">Logout</div>
