@@ -38,4 +38,8 @@ export class NavComponent implements OnInit
         this.accountService.logout();
         this.router.navigateByUrl('/');
     }
+
+    redirectProfilePage(){
+        this.router.navigateByUrl('/members');
+    }
 }
