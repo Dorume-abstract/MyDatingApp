@@ -17,7 +17,11 @@ namespace API.Entities
         public string City { get; set; }
         public string Country { get; set; }
         public ICollection<Photo> Photos { get; set; }
+
         public List<UserLike> LikedByUser { get; set; }
         public List<UserLike> LikedUsers { get; set; }
+
+        public List<Message> MessagesSent { get; set; }
+        public List<Message> MessagesReceived { get; set; }
     }
 }
