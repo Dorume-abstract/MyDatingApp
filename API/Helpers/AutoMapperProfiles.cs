@@ -22,7 +22,9 @@ namespace API.Helpers
 
             CreateMap<MemberUpdateDto, AppUser>();
 
-            CreateMap<RegisterDto, AppUser>();
+            CreateMap<RegisterDto, AppUser>()
+                .ForMember(x => x.DateOfBirth, opt => opt.MapFrom(src => 
+                    DateOnly.FromDateTime(src.DateOfBirth)));
 
             CreateMap<Message, MessageDto>()
                 .ForMember(dest => dest.SenderPhotoUrl, opt => opt.MapFrom(src =>
