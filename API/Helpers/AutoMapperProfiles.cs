@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using API.DTOs;
 using API.Entities;
 using API.Extensions;
@@ -17,13 +13,14 @@ namespace API.Helpers
                 .ForMember(dest => dest.PhotoUrl, opt => opt.MapFrom(src =>
                     src.Photos.FirstOrDefault(x => x.IsMain).Url))
                 .ForMember(dest => dest.Age, opt => opt.MapFrom(src =>
-                    src.DateOfBirth.CalculateAge()));
+                    src.DateOfBirth.CalculateAge()))
+                ;
             CreateMap<Photo, PhotoDto>();
 
             CreateMap<MemberUpdateDto, AppUser>();
 
             CreateMap<RegisterDto, AppUser>()
-                .ForMember(x => x.DateOfBirth, opt => opt.MapFrom(src => 
+                .ForMember(x => x.DateOfBirth, opt => opt.MapFrom(src =>
                     DateOnly.FromDateTime(src.DateOfBirth)));
 
             CreateMap<Message, MessageDto>()
@@ -31,6 +28,10 @@ namespace API.Helpers
                     src.Sender.Photos.FirstOrDefault(x => x.IsMain).Url))
                 .ForMember(dest => dest.RecipientPhotoUrl, opt => opt.MapFrom(src =>
                     src.Recipient.Photos.FirstOrDefault(x => x.IsMain).Url));
+
+            CreateMap<DateTime, DateTime>().ConvertUsing(d => DateTime.SpecifyKind(d, DateTimeKind.Utc));
+            CreateMap<DateTime?, DateTime?>().ConvertUsing(d => d.HasValue ? 
+                DateTime.SpecifyKind(d.Value, DateTimeKind.Utc) : null);
 
         }
     }
