@@ -15,8 +15,7 @@ export class NavComponent implements OnInit
     constructor (
         public accountService: AccountService,
         private router: Router,
-        private memberService: MembersService
-    ) { }
+        private memberService: MembersService) { }
 
     ngOnInit(): void { }
 
@@ -26,7 +25,7 @@ export class NavComponent implements OnInit
         {
             next: _ =>
             {
-                this.memberService.resetUserParams();
+                console.log(this.memberService.resetUserParams());
                 this.redirectProfilePage();
                 this.model = {};
             }
