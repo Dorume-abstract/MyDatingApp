@@ -27,15 +27,15 @@ export class MessageService
     {
         this.busyService.busy();
         this.hubConnection = new HubConnectionBuilder()
-            .withUrl(this.hubUrl + 'messages?user=' + otherUsername, {
+            .withUrl(this.hubUrl + 'message?user=' + otherUsername, {
                 accessTokenFactory: () => user.token
             })
             .withAutomaticReconnect()
             .build();
 
         this.hubConnection.start()
-            .catch(error => console.log(error))
-            .finally(() => this.busyService.idle());
+            .catch((error) => console.log(error))
+            this.busyService.idle();
 
         this.hubConnection.on("ReceiveMessageThread", messages =>
         {
