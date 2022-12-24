@@ -16,7 +16,10 @@ builder.Services.AddIdentityServices(builder.Configuration);
 
 var connString = "";
 if (builder.Environment.IsDevelopment())
+{
+    Console.WriteLine("Dev mode");
     connString = builder.Configuration.GetConnectionString("DefaultConnection");
+}
 else
 {
     // Use connection string provided at runtime by FlyIO.
@@ -49,7 +52,7 @@ app.UseCors(builder => builder
     .AllowAnyHeader()
     .AllowAnyMethod()
     .AllowCredentials()
-    .WithOrigins("https://localhost:4200", "https://dorumedatingapp.fly.dev"));
+    .WithOrigins("https://localhost:4200", "https://dorumedatingapp.fly.dev", "https://localhost:5001"));
 
 app.UseAuthentication();
 app.UseAuthorization();

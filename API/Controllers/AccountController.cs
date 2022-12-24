@@ -1,4 +1,3 @@
-using API.Data;
 using API.DTOs;
 using API.Entities;
 using API.Interfaces;
@@ -14,8 +13,11 @@ namespace API.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly ITokenService _tokenService;
         private readonly IMapper _mapper;
-        public AccountController(UserManager<AppUser> userManager, ITokenService tokenService, IMapper mapper)
+        private readonly ILogger<AccountController> _logger;
+        public AccountController(UserManager<AppUser> userManager, ITokenService tokenService, IMapper mapper,
+            ILogger<AccountController> logger)
         {
+            _logger = logger;
             _userManager = userManager;
             _mapper = mapper;
             _tokenService = tokenService;
@@ -32,11 +34,20 @@ namespace API.Controllers
 
             var result = await _userManager.CreateAsync(user, registerDto.Password);
 
-            if(!result.Succeeded) return BadRequest(result.Errors);
+            if (!result.Succeeded)
+            {
+                _logger.LogError("Creating acccount error. Line 39.");
+                return BadRequest(result.Errors);
+
+            };
 
             var roleResult = await _userManager.AddToRoleAsync(user, "Member");
 
-            if(!roleResult.Succeeded) return BadRequest(result.Errors);
+            if (!roleResult.Succeeded)
+            {
+                _logger.LogError("Role error. Line 39.");
+                return BadRequest(result.Errors);
+            }
 
             return new UserDto
             {
@@ -59,7 +70,7 @@ namespace API.Controllers
 
             var result = await _userManager.CheckPasswordAsync(user, loginDto.Password);
 
-            if(!result) return Unauthorized("Invalid password");
+            if (!result) return Unauthorized("Invalid password");
 
             return new UserDto
             {
