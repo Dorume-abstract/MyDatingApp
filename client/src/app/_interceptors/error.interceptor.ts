@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import
-    {
-        HttpRequest,
-        HttpHandler,
-        HttpEvent,
-        HttpInterceptor,
-    } from '@angular/common/http';
+{
+    HttpRequest,
+    HttpHandler,
+    HttpEvent,
+    HttpInterceptor,
+} from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { NavigationExtras, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -27,16 +27,13 @@ export class ErrorInterceptor implements HttpInterceptor
                 if (error) {
                     switch (error.status) {
                         case 400:
-                            if (error.error.errors) {
-                                const modalStateErrors = [];
-                                for (const key in error.error.errors) {
-                                    if (error.error.errors[key]) {
-                                        modalStateErrors.push(error.error.errors[key]);
-                                    }
-                                }
-                                throw modalStateErrors.flat();
-                            } else {
-                            this.toastr.error(error.error);
+                            console.log(error);
+                            if(error.error.length > 0){
+                                error.error.forEach(er => {
+                                    this.toastr.error(er.description);
+                                });
+                            }else{
+                                this.toastr.error(error.error);
                             }
                             break;
                         case 401:
