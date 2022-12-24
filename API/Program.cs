@@ -49,7 +49,7 @@ app.UseCors(builder => builder
     .AllowAnyHeader()
     .AllowAnyMethod()
     .AllowCredentials()
-    .WithOrigins("https://localhost:4200"));
+    .WithOrigins("https://localhost:4200", "https://dorumedatingapp.fly.dev"));
 
 app.UseAuthentication();
 app.UseAuthorization();
